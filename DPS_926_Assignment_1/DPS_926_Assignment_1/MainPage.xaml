@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DPS_926_Assignment_1"
              x:Class="DPS_926_Assignment_1.MainPage"
              Title="Cash Register App">
 
     <StackLayout Orientation="Vertical">
         <Label x:Name="ItemName"
-               FontSize="1"
+               FontSize="{x:Static local:Page_Prop.Page_font}"
                TextColor="Black"
                Padding="25, 10, 10, 10"
                Margin="5"/>
@@ -42,11 +43,13 @@
                          x:Name="BuyLayout"
                          Orientation="Vertical">
                 <Label x:Name="Total"
-                       FontSize="1"
-                       TextColor="Black"/>
+                       TextColor="Black"
+                       FontSize="{x:Static local:Page_Prop.Page_font}"
+                       Margin="5"/>
                 <Button x:Name="BuyButton" Text="Buy" 
                         BackgroundColor="blue" TextColor="White"
                         VerticalOptions="FillAndExpand"
+                        FontSize="{x:Static local:Page_Prop.Page_font}"
                         Margin="5"/>
             </StackLayout>
         </Grid>

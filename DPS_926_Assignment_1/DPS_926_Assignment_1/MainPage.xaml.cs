@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -8,38 +9,45 @@ using Xamarin.Forms;
 
 namespace DPS_926_Assignment_1
 {
+    public static class Page_Prop
+    {
+        public static double Page_font { get; set; } = 25;
+    }
     public partial class MainPage : ContentPage
     {
-        public String cur_item_name;
-        public static int page_font;
-        public Decimal total;
+        private String cur_item_name;
+        private Decimal total;
+        private List<Button> num_buttons = new List<Button>();
         public MainPage()
         {
             cur_item_name = "[item_name]";
-            page_font = 25;
             total = 0;
             InitializeComponent();
-            ItemName.FontSize = page_font;
-            Total.FontSize = page_font;
             ItemName.Text = cur_item_name;
             Total.Text = total.ToString();
-            setUpButtons();
+            SetUpButtons();
         }
 
-        private void setUpButtons()
+        private void SetUpButtons()
         {
-            Num0.FontSize = page_font;
-            Num1.FontSize = page_font;
-            Num2.FontSize = page_font;
-            Num3.FontSize = page_font;
-            Num4.FontSize = page_font;
-            Num5.FontSize = page_font;
-            Num6.FontSize = page_font;
-            Num7.FontSize = page_font;
-            Num8.FontSize = page_font;
-            Num9.FontSize = page_font;
-            BuyButton.FontSize = page_font;
-
+            if (num_buttons.Count == 0)
+            {
+                num_buttons.Add(Num0);
+                num_buttons.Add(Num1);
+                num_buttons.Add(Num2);
+                num_buttons.Add(Num3);
+                num_buttons.Add(Num4);
+                num_buttons.Add(Num5);
+                num_buttons.Add(Num6);
+                num_buttons.Add(Num7);
+                num_buttons.Add(Num8);
+                num_buttons.Add(Num9);
+            }
+            
+            foreach (Button bt in num_buttons)
+            {
+                bt.FontSize = Page_Prop.Page_font;
+            }
         }
     }
 }
