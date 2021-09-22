@@ -1,24 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DPS_926_Assignment_1.MainPage">
+             x:Class="DPS_926_Assignment_1.MainPage"
+             Title="Cash Register App">
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
+    <StackLayout Orientation="Vertical">
+        <Label x:Name="ItemName"
+               FontSize="1"
+               TextColor="Black"
+               Padding="25, 10, 10, 10"
+               Margin="5"/>
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0"
+                  x:Name="NumericButtons">
+                <Button Grid.Row="0" Grid.Column="0" 
+                        x:Name="Num1"  Text="1" />
+                <Button Grid.Row="0" Grid.Column="1" 
+                        x:Name="Num2"  Text="2" />
+                <Button Grid.Row="0" Grid.Column="2" 
+                        x:Name="Num3"  Text="3" />
+                <Button Grid.Row="1" Grid.Column="0" 
+                        x:Name="Num4"  Text="4" />
+                <Button Grid.Row="1" Grid.Column="1" 
+                        x:Name="Num5"  Text="5" />
+                <Button Grid.Row="1" Grid.Column="2" 
+                        x:Name="Num6"  Text="6" />
+                <Button Grid.Row="2" Grid.Column="0" 
+                        x:Name="Num7"  Text="7" />
+                <Button Grid.Row="2" Grid.Column="1" 
+                        x:Name="Num8"  Text="8" />
+                <Button Grid.Row="2" Grid.Column="2" 
+                        x:Name="Num9"  Text="9" />
+                <Button Grid.Row="3" Grid.Column="1" 
+                        x:Name="Num0"  Text="0" />
+            </Grid>
+            <StackLayout Grid.Column="1" 
+                         x:Name="BuyLayout"
+                         Orientation="Vertical">
+                <Label x:Name="Total"
+                       FontSize="1"
+                       TextColor="Black"/>
+                <Button x:Name="BuyButton" Text="Buy" 
+                        BackgroundColor="blue" TextColor="White"
+                        VerticalOptions="FillAndExpand"
+                        Margin="5"/>
+            </StackLayout>
+        </Grid>
     </StackLayout>
 
 </ContentPage>
