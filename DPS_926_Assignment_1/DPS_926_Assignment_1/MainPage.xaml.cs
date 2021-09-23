@@ -42,6 +42,7 @@ namespace DPS_926_Assignment_1
             Quantity.Text = items[cur_item_idx].Quantity.ToString();
             Total.Text = total.ToString();
             SetUpButtons();
+            Inventory.ItemsSource = items;
         }
 
         private void CreateInventory()
@@ -49,6 +50,11 @@ namespace DPS_926_Assignment_1
             AddItem(new Item("Pants", Convert.ToDecimal(55.50), 20));
             AddItem(new Item("Shoes", Convert.ToDecimal(80.99), 20));
             AddItem(new Item("Pants", Convert.ToDecimal(10), 10)); //Test adding same item
+            AddItem(new Item("Glasses", Convert.ToDecimal(230.30), 5));
+            AddItem(new Item("T-Shirt", Convert.ToDecimal(70), 40));
+            AddItem(new Item("Jacket", Convert.ToDecimal(179.99), 20));
+            AddItem(new Item("Scarf", Convert.ToDecimal(25.50), 50));
+            AddItem(new Item("Baseball Cap", Convert.ToDecimal(49.97), 50));
             total_items = items.Count;
         }
 
@@ -57,9 +63,11 @@ namespace DPS_926_Assignment_1
             if (items.Contains(it))
             {
                 items[items.IndexOf(it)].Quantity += it.Quantity;
+            } else
+            {
+                items.Add(it);
             }
 
-            items.Add(it);
         }
 
         private void SetUpButtons()
@@ -83,6 +91,15 @@ namespace DPS_926_Assignment_1
                 bt.FontSize = Page_Prop.Page_font;
                 bt.CornerRadius = 5;
             }
+        }
+
+        public void TextCell_Tapped(object sender, EventArgs e)
+        {
+            TextCell selected = (TextCell) sender;
+            cur_item_name = selected.Text;
+            cur_item_idx = items.IndexOf( items.First<Item>(it => it.Name.Equals(selected.Text)) );
+            ItemName.Text = cur_item_name;
+            Quantity.Text = items[cur_item_idx].Quantity.ToString();
         }
     }
 }

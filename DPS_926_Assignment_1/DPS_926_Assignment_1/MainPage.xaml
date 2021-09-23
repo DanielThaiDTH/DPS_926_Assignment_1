@@ -11,7 +11,8 @@
                TextColor="Black"
                Padding="25, 10, 10, 10"
                Margin="5"/>
-        <Grid Margin="5">
+        <Grid Margin="5"
+              MinimumHeightRequest="250">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="*"/>
@@ -45,12 +46,12 @@
                 <Label x:Name="Total"
                        TextColor="Black"
                        FontSize="{x:Static local:Page_Prop.Page_font}"
-                       Margin="5"/>
+                       Margin="10"/>
                 <Button x:Name="BuyButton" Text="Buy" 
                         BackgroundColor="blue" TextColor="White"
                         VerticalOptions="FillAndExpand"
                         FontSize="{x:Static local:Page_Prop.Page_font}"
-                        Margin="5" CornerRadius="5"/>
+                        Margin="10" CornerRadius="5"/>
             </StackLayout>
         </Grid>
         <Label x:Name="Quantity"
@@ -58,5 +59,16 @@
                FontSize="{x:Static local:Page_Prop.Page_font}"
                TextColor="Black"
                Margin="10"/>
+        <ListView x:Name="Inventory">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}"
+                              TextColor="Black"
+                              Detail="{Binding Quantity}"
+                              DetailColor="blue"
+                              Tapped="TextCell_Tapped"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 </ContentPage>
