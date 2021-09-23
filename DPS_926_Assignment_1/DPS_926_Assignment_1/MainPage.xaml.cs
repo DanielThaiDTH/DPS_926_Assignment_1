@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Daniel Thai
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.ComponentModel;
@@ -6,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Collections.ObjectModel;
 
 namespace DPS_926_Assignment_1
 {
@@ -16,16 +19,47 @@ namespace DPS_926_Assignment_1
     public partial class MainPage : ContentPage
     {
         private String cur_item_name;
+        private int cur_item_idx = 0;
+        private int total_items;
         private Decimal total;
         private List<Button> num_buttons = new List<Button>();
+        ObservableCollection<Item> items = new ObservableCollection<Item>();
+        public ObservableCollection<Item> Items
+        {
+            get
+            {
+                return items;
+            }
+        }
+
         public MainPage()
         {
-            cur_item_name = "[item_name]";
+            CreateInventory();
+            cur_item_name = items[cur_item_idx].Name;
             total = 0;
             InitializeComponent();
             ItemName.Text = cur_item_name;
+            Quantity.Text = items[cur_item_idx].Quantity.ToString();
             Total.Text = total.ToString();
             SetUpButtons();
+        }
+
+        private void CreateInventory()
+        {
+            AddItem(new Item("Pants", Convert.ToDecimal(55.50), 20));
+            AddItem(new Item("Shoes", Convert.ToDecimal(80.99), 20));
+            AddItem(new Item("Pants", Convert.ToDecimal(10), 10)); //Test adding same item
+            total_items = items.Count;
+        }
+
+        private void AddItem(Item it)
+        {
+            if (items.Contains(it))
+            {
+                items[items.IndexOf(it)].Quantity += it.Quantity;
+            }
+
+            items.Add(it);
         }
 
         private void SetUpButtons()
@@ -47,6 +81,7 @@ namespace DPS_926_Assignment_1
             foreach (Button bt in num_buttons)
             {
                 bt.FontSize = Page_Prop.Page_font;
+                bt.CornerRadius = 5;
             }
         }
     }

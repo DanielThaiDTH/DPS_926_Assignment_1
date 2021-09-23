@@ -50,9 +50,13 @@
                         BackgroundColor="blue" TextColor="White"
                         VerticalOptions="FillAndExpand"
                         FontSize="{x:Static local:Page_Prop.Page_font}"
-                        Margin="5"/>
+                        Margin="5" CornerRadius="5"/>
             </StackLayout>
         </Grid>
+        <Label x:Name="Quantity"
+               Text="[Quantity]"
+               FontSize="{x:Static local:Page_Prop.Page_font}"
+               TextColor="Black"
+               Margin="10"/>
     </StackLayout>
-
 </ContentPage>
