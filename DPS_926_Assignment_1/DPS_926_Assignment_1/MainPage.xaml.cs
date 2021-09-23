@@ -12,10 +12,12 @@ using System.Collections.ObjectModel;
 
 namespace DPS_926_Assignment_1
 {
+    //Static page properties
     public static class Page_Prop
     {
         public static double Page_font { get; set; } = 25;
     }
+
     public partial class MainPage : ContentPage
     {
         private Item cur_item;
@@ -83,10 +85,9 @@ namespace DPS_926_Assignment_1
                 bt.FontSize = Page_Prop.Page_font;
                 bt.CornerRadius = 5;
             }
-
-
         }
 
+        //Sets the current selected item when tapped on the list
         public void TextCell_Tapped(object sender, EventArgs e)
         {
             TextCell selected = (TextCell) sender;
@@ -97,6 +98,7 @@ namespace DPS_926_Assignment_1
             Inventory.ItemsSource = items;
         }
 
+        //Updates the total selected when a number pad button is clicked
         private void Num_Clicked(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -104,6 +106,9 @@ namespace DPS_926_Assignment_1
             {
                 DisplayAlert("Quantity Too Large", "Entered quantity is too large", "Close");
                 return;
+            } else if (digits.Count == 0 && but_vals[button.Text] == 0)
+            {
+                return; //Do nothing when 0 is the first button clicked.
             }
 
             digits.Add(but_vals[button.Text]);
