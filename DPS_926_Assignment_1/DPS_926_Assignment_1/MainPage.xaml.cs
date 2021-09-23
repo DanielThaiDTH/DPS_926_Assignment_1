@@ -18,12 +18,14 @@ namespace DPS_926_Assignment_1
     }
     public partial class MainPage : ContentPage
     {
-        private String cur_item_name;
+        private Item cur_item;
         private int cur_item_idx = 0;
         private int total_items;
         private Decimal total;
         private List<Button> num_buttons = new List<Button>();
-        ObservableCollection<Item> items = new ObservableCollection<Item>();
+        private List<int> digits = new List<int>();
+        private Dictionary<string, int> but_vals = new Dictionary<string, int>();
+        ObservableCollection<Item> items;
         public ObservableCollection<Item> Items
         {
             get
@@ -32,43 +34,22 @@ namespace DPS_926_Assignment_1
             }
         }
 
-        public MainPage()
+        public MainPage(ObservableCollection<Item> inventory)
         {
-            CreateInventory();
-            cur_item_name = items[cur_item_idx].Name;
+            items = inventory;
+            total_items = items.Count;
+            cur_item = items[cur_item_idx];
             total = 0;
+
             InitializeComponent();
-            ItemName.Text = cur_item_name;
-            Quantity.Text = items[cur_item_idx].Quantity.ToString();
+
+            Inventory.ItemsSource = items;
+            ItemName.Text = cur_item.Name;
+            Quantity.Text = "0";
             Total.Text = total.ToString();
             SetUpButtons();
-            Inventory.ItemsSource = items;
         }
-
-        private void CreateInventory()
-        {
-            AddItem(new Item("Pants", Convert.ToDecimal(55.50), 20));
-            AddItem(new Item("Shoes", Convert.ToDecimal(80.99), 20));
-            AddItem(new Item("Pants", Convert.ToDecimal(10), 10)); //Test adding same item
-            AddItem(new Item("Glasses", Convert.ToDecimal(230.30), 5));
-            AddItem(new Item("T-Shirt", Convert.ToDecimal(70), 40));
-            AddItem(new Item("Jacket", Convert.ToDecimal(179.99), 20));
-            AddItem(new Item("Scarf", Convert.ToDecimal(25.50), 50));
-            AddItem(new Item("Baseball Cap", Convert.ToDecimal(49.97), 50));
-            total_items = items.Count;
-        }
-
-        private void AddItem(Item it)
-        {
-            if (items.Contains(it))
-            {
-                items[items.IndexOf(it)].Quantity += it.Quantity;
-            } else
-            {
-                items.Add(it);
-            }
-
-        }
+            
 
         private void SetUpButtons()
         {
@@ -84,6 +65,17 @@ namespace DPS_926_Assignment_1
                 num_buttons.Add(Num7);
                 num_buttons.Add(Num8);
                 num_buttons.Add(Num9);
+
+                but_vals.Add(Num0.Text, 0);
+                but_vals.Add(Num1.Text, 1);
+                but_vals.Add(Num2.Text, 2);
+                but_vals.Add(Num3.Text, 3);
+                but_vals.Add(Num4.Text, 4);
+                but_vals.Add(Num5.Text, 5);
+                but_vals.Add(Num6.Text, 6);
+                but_vals.Add(Num7.Text, 7);
+                but_vals.Add(Num8.Text, 8);
+                but_vals.Add(Num9.Text, 9);
             }
             
             foreach (Button bt in num_buttons)
@@ -91,15 +83,62 @@ namespace DPS_926_Assignment_1
                 bt.FontSize = Page_Prop.Page_font;
                 bt.CornerRadius = 5;
             }
+
+
         }
 
         public void TextCell_Tapped(object sender, EventArgs e)
         {
             TextCell selected = (TextCell) sender;
-            cur_item_name = selected.Text;
-            cur_item_idx = items.IndexOf( items.First<Item>(it => it.Name.Equals(selected.Text)) );
-            ItemName.Text = cur_item_name;
-            Quantity.Text = items[cur_item_idx].Quantity.ToString();
+            cur_item = items.First<Item>(it => it.Name.Equals(selected.Text));
+            cur_item_idx = items.IndexOf(cur_item);
+            ItemName.Text = cur_item.Name;
+            Inventory.ItemsSource = null;
+            Inventory.ItemsSource = items;
+        }
+
+        private void Num_Clicked(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            if (digits.Count >= 9) //prevent integer overflow
+            {
+                DisplayAlert("Quantity Too Large", "Entered quantity is too large", "Close");
+                return;
+            }
+
+            digits.Add(but_vals[button.Text]);
+
+            total_items = 0;
+            for (int i = 0; i < digits.Count; i++)
+            {
+                total_items += (int) Math.Pow(10, (digits.Count - i - 1)) * digits[i];
+            }
+
+            Quantity.Text = total_items.ToString();
+            total = total_items * cur_item.Price;
+            Total.Text = total.ToString();
+        }
+
+        private void BuyButton_Clicked(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+
+            if (cur_item.Quantity < total_items)
+            {
+                DisplayAlert("Quantity Too Large",
+                    "Number of " + cur_item.Name + "s selected is more than what is in inventory.", "Close");
+            } else
+            {
+                cur_item.Quantity -= total_items;
+                Inventory.ItemsSource = null;
+                Inventory.ItemsSource = items;
+            }
+
+            total_items = 0;
+            total = 0;
+            Quantity.Text = "0";
+            Total.Text = "0";
+            digits.Clear();
         }
     }
 }
