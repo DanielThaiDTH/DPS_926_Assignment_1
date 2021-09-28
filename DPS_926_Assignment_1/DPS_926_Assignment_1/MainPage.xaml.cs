@@ -44,6 +44,7 @@ namespace DPS_926_Assignment_1
             ManagerChildPage = mp;
             items = inventory;
             history = new ObservableCollection<PurchaseLog>();
+            ManagerChildPage.RegisterHistory(history);
             total_items = items.Count;
             cur_item = items[cur_item_idx];
             total = 0;
@@ -135,10 +136,13 @@ namespace DPS_926_Assignment_1
             {
                 DisplayAlert("Quantity Too Large",
                     "Number of " + cur_item.Name + "s selected is more than what is in inventory.", "Close");
+            } else if (total_items == 0)
+            {
+                return;
             } else
             {
                 cur_item.Quantity -= total_items;
-                history.Add(new PurchaseLog(cur_item.Name, total_items * cur_item.Price, cur_item.Quantity, DateTime.Now));
+                history.Add(new PurchaseLog(cur_item.Name, total_items * cur_item.Price, total_items, DateTime.Now));
             }
 
             total_items = 0;

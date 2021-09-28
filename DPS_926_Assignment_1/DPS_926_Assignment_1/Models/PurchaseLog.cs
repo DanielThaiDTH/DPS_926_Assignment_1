@@ -34,12 +34,12 @@ namespace DPS_926_Assignment_1
             }
 
             return this.Name.Equals(other.Name) && this.Total == other.Total
-                && this.Quantity == other.Quantity;
+                && this.Quantity == other.Quantity && this.PurchaseTime == other.PurchaseTime;
         }
 
         public override int GetHashCode()
         {
-            return this.Name.GetHashCode() + (int)this.Total + this.Quantity;
+            return this.Name.GetHashCode() + (int)this.Total + this.Quantity + this.PurchaseTime.GetHashCode();
         }
     }
 }

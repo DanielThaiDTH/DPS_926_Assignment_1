@@ -21,8 +21,14 @@
                                          Property=Height,
                                          Factor=0.3}"
             >
-            <Button Text="History"/>
-            <Button Text="Restock"/>
+            <Button Text="History" FontSize="15" FontAttributes="Bold"
+                    BackgroundColor="Maroon" TextColor="White"
+                    x:Name="History_Button"
+                    Clicked="History_Button_Clicked"/>
+            <Button Text="Restock" FontSize="15" FontAttributes="Bold"
+                    BackgroundColor="Maroon" TextColor="White"/>
+            <Button Text="Add New Product" FontSize="15" FontAttributes="Bold"
+                    BackgroundColor="Maroon" TextColor="White"/>
         </StackLayout>
     </RelativeLayout>
 </ContentPage>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DPS_926_Assignment_1.LogPage">
+    <RelativeLayout x:Name="LogLayout">
+        <StackLayout RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Width,
+                                                                       Factor=0.33}"
+                     RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Height,
+                                                                       Factor=0.35}">
+            <Label Text="{Binding PurchaseLog.Name}" TextColor="Black" FontSize="18"/>
+            <Label Text="{Binding PurchaseLog.Quantity}" TextColor="Black" FontSize="18"/>
+            <Label Text="{Binding PurchaseLog.PurchaseTime}" TextColor="Black" FontSize="18"/>
+            <Label Text="{Binding TotalMsg}" TextColor="Black" FontSize="18"/>
+        </StackLayout>
+    </RelativeLayout>
+</ContentPage>

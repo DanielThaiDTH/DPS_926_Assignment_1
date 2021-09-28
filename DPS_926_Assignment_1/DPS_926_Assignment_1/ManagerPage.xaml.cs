@@ -14,7 +14,8 @@ namespace DPS_926_Assignment_1
     public partial class ManagerPage : ContentPage
     {
         ObservableCollection<Item> _inventory;
-        ObservableCollection<PurchaseLog> history = null;
+        ObservableCollection<PurchaseLog> history;
+        HistoryPage historyView;
         public ManagerPage(ObservableCollection<Item> inventory)
         {
             InitializeComponent();
@@ -24,6 +25,13 @@ namespace DPS_926_Assignment_1
         public void RegisterHistory(ObservableCollection<PurchaseLog> purchaseHistory)
         {
             history = purchaseHistory;
+            historyView = new HistoryPage(history);
+        }
+
+        private void History_Button_Clicked(object sender, EventArgs e)
+        {
+            if (historyView != null)
+                Navigation.PushAsync(historyView);
         }
     }
 }
