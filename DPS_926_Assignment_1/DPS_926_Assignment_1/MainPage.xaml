@@ -6,11 +6,19 @@
              Title="Cash Register App">
 
     <StackLayout Orientation="Vertical">
-        <Label x:Name="ItemName"
-               FontSize="{x:Static local:Page_Prop.Page_font}"
-               TextColor="Black"
-               Padding="25, 10, 10, 10"
-               Margin="5"/>
+        <StackLayout Orientation="Horizontal">
+            <Label x:Name="ItemName"
+                   HorizontalOptions="StartAndExpand"
+                   FontSize="{x:Static local:Page_Prop.Page_font}"
+                   TextColor="Black"
+                   Padding="25, 10, 10, 10"
+                   Margin="5"/>
+            <Button x:Name="ManagerButton"
+                    Clicked="ManagerButton_Clicked"
+                    BackgroundColor="red"
+                    TextColor="white"
+                    Text="Manager"/>
+        </StackLayout>
         <Grid Margin="5"
               MinimumHeightRequest="250">
             <Grid.ColumnDefinitions>

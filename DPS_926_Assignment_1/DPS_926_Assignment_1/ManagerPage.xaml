@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DPS_926_Assignment_1.ManagerPage">
+    <RelativeLayout>
+        <StackLayout 
+            RelativeLayout.HeightConstraint="{ConstraintExpression 
+                                              Type=RelativeToParent,
+                                              Property=Height,
+                                              Factor=0.3}"
+            RelativeLayout.WidthConstraint="{ConstraintExpression
+                                             Type=RelativeToParent,
+                                             Property=Width,
+                                             Factor=0.4}"
+            RelativeLayout.XConstraint="{ConstraintExpression 
+                                         Type=RelativeToParent,
+                                         Property=Width,
+                                         Factor=0.3}"
+            RelativeLayout.YConstraint="{ConstraintExpression 
+                                         Type=RelativeToParent,
+                                         Property=Height,
+                                         Factor=0.3}"
+            >
+            <Button Text="History"/>
+            <Button Text="Restock"/>
+        </StackLayout>
+    </RelativeLayout>
+</ContentPage>

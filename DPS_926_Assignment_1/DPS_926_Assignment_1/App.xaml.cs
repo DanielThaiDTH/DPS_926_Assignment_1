@@ -11,7 +11,8 @@ namespace DPS_926_Assignment_1
         {
             InitializeComponent();
             ObservableCollection<Item> inventory = CreateInventory(new ObservableCollection<Item>());
-            MainPage = new MainPage(inventory);
+            ManagerPage MPage = new ManagerPage(inventory);
+            MainPage = new NavigationPage(new MainPage(inventory, MPage));
         }
 
         protected override void OnStart()
@@ -32,7 +33,7 @@ namespace DPS_926_Assignment_1
             AddItem(items, new Item("Shoes", Convert.ToDecimal(80.99), 20));
             AddItem(items, new Item("Pants", Convert.ToDecimal(10), 10)); //Test adding same item
             AddItem(items, new Item("Glasses", Convert.ToDecimal(230.30), 5));
-            AddItem(items, new Item("T-Shirt", Convert.ToDecimal(70), 40));
+            AddItem(items, new Item("T-Shirt", Convert.ToDecimal(50), 40));
             AddItem(items, new Item("Jacket", Convert.ToDecimal(179.99), 20));
             AddItem(items, new Item("Scarf", Convert.ToDecimal(25.50), 50));
             AddItem(items, new Item("Baseball Cap", Convert.ToDecimal(49.97), 50));

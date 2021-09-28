@@ -27,6 +27,7 @@ namespace DPS_926_Assignment_1
         private List<Button> num_buttons = new List<Button>();
         private List<int> digits = new List<int>();
         private Dictionary<string, int> but_vals = new Dictionary<string, int>();
+        ManagerPage ManagerChildPage = null;
         ObservableCollection<Item> items;
         public ObservableCollection<Item> Items
         {
@@ -36,9 +37,13 @@ namespace DPS_926_Assignment_1
             }
         }
 
-        public MainPage(ObservableCollection<Item> inventory)
+        ObservableCollection<PurchaseLog> history;
+
+        public MainPage(ObservableCollection<Item> inventory, ManagerPage mp)
         {
+            ManagerChildPage = mp;
             items = inventory;
+            history = new ObservableCollection<PurchaseLog>();
             total_items = items.Count;
             cur_item = items[cur_item_idx];
             total = 0;
@@ -94,8 +99,6 @@ namespace DPS_926_Assignment_1
             cur_item = items.First<Item>(it => it.Name.Equals(selected.Text));
             cur_item_idx = items.IndexOf(cur_item);
             ItemName.Text = cur_item.Name;
-            Inventory.ItemsSource = null;
-            Inventory.ItemsSource = items;
         }
 
         //Updates the total selected when a number pad button is clicked
@@ -135,8 +138,7 @@ namespace DPS_926_Assignment_1
             } else
             {
                 cur_item.Quantity -= total_items;
-                Inventory.ItemsSource = null;
-                Inventory.ItemsSource = items;
+                history.Add(new PurchaseLog(cur_item.Name, total_items * cur_item.Price, cur_item.Quantity, DateTime.Now));
             }
 
             total_items = 0;
@@ -144,6 +146,11 @@ namespace DPS_926_Assignment_1
             Quantity.Text = "0";
             Total.Text = "0";
             digits.Clear();
+        }
+
+        private void ManagerButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(ManagerChildPage);
         }
     }
 }

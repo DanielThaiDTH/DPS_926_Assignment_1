@@ -1,15 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 
 namespace DPS_926_Assignment_1
 {
-    public class Item
+    public class Item :INotifyPropertyChanged
     {
+        private int _quantity;
         public String Name { get; private set; }
         public Decimal Price { get; private set; }
-        public int Quantity { get; set; }
+        public int Quantity { 
+            get { return _quantity; }
+            set 
+            {
+                if (_quantity == value)
+                    return;
+
+                _quantity = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Quantity)));
+            } 
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Item(String name, Decimal price, int qt)
         {
