@@ -16,10 +16,12 @@ namespace DPS_926_Assignment_1
         ObservableCollection<Item> _inventory;
         ObservableCollection<PurchaseLog> history;
         HistoryPage historyView;
+        RestockPage restocker;
         public ManagerPage(ObservableCollection<Item> inventory)
         {
             InitializeComponent();
             _inventory = inventory;
+            restocker = new RestockPage(_inventory);
         }
 
         public void RegisterHistory(ObservableCollection<PurchaseLog> purchaseHistory)
@@ -32,6 +34,12 @@ namespace DPS_926_Assignment_1
         {
             if (historyView != null)
                 Navigation.PushAsync(historyView);
+        }
+
+        private void Restock_Button_Clicked(object sender, EventArgs e)
+        {
+            if (restocker != null)
+                Navigation.PushAsync(restocker);
         }
     }
 }

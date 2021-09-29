@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DPS_926_Assignment_1.RestockPage">
+    <StackLayout Orientation="Vertical">
+        <Entry Placeholder="Enter new quantity"
+               x:Name="QtyEnter"/>
+        <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="Center">
+            <Button Text="Restock" TextColor="DarkCyan"
+                    BackgroundColor="white"
+                    BorderColor="White"
+                    x:Name="RestockButton"
+                    Clicked="RestockButton_Clicked"/>
+            <Button Text="Cancel" TextColor="DarkCyan"
+                    BackgroundColor="white"
+                    BorderColor="white"
+                    x:Name="CancelRestock"
+                    Clicked="CancelRestock_Clicked"/>
+        </StackLayout>
+        <ListView x:Name="InventoryList">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Name}"
+                                   TextColor="Black"
+                                   FontSize="16"
+                                   HorizontalOptions="StartAndExpand"
+                                   Margin="15, 0, 0, 0"/>
+                            <Label Text="{Binding Quantity}"
+                                   TextColor="Black"
+                                   FontSize="16"
+                                   HorizontalOptions="EndAndExpand"
+                                   Margin="0, 0, 15, 0"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
