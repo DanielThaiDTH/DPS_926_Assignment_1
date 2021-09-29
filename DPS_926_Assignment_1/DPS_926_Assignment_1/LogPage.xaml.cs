@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace DPS_926_Assignment_1
         {
             get
             {
-                return "Total Amount: $" + pLog.Total.ToString();
+                return "Total Amount: " + pLog.Total.ToString("C", CultureInfo.CurrentCulture.NumberFormat);
             }
         }
         public LogPage(PurchaseLog log)

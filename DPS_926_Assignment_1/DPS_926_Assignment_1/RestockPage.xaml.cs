@@ -62,6 +62,8 @@ namespace DPS_926_Assignment_1
         private void CancelRestock_Clicked(object sender, EventArgs e)
         {
             Navigation.PopAsync();
+            QtyEnter.Text = "";
+            InventoryList.SelectedItem = null;
         }
     }
 }

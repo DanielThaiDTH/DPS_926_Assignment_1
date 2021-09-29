@@ -100,6 +100,8 @@ namespace DPS_926_Assignment_1
             cur_item = items.First<Item>(it => it.Name.Equals(selected.Text));
             cur_item_idx = items.IndexOf(cur_item);
             ItemName.Text = cur_item.Name;
+            total = total_items * cur_item.Price;
+            Total.Text = total.ToString();
         }
 
         //Updates the total selected when a number pad button is clicked

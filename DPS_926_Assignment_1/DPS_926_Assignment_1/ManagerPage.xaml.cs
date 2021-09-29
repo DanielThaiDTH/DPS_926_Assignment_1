@@ -41,5 +41,10 @@ namespace DPS_926_Assignment_1
             if (restocker != null)
                 Navigation.PushAsync(restocker);
         }
+
+        private void Add_Prod_Button_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AddProductPage(_inventory));
+        }
     }
 }

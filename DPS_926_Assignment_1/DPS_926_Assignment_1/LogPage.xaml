@@ -5,7 +5,7 @@
     <RelativeLayout x:Name="LogLayout">
         <StackLayout RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
                                                                        Property=Width,
-                                                                       Factor=0.33}"
+                                                                       Factor=0.27}"
                      RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
                                                                        Property=Height,
                                                                        Factor=0.35}">

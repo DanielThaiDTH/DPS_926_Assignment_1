@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DPS_926_Assignment_1.AddProductPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Clicked="saveClicked"/>
+        <ToolbarItem Text="Cancel" Clicked="cancelClicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <TableView Intent="Form">
+            <TableRoot>
+                <TableSection Title="New Product">
+                    <EntryCell x:Name="NameEntry" Label="Name" Placeholder="Enter product name"/>
+                    <EntryCell x:Name="PriceEntry" Label="Price" Placeholder="Enter product unit price"/>
+                    <EntryCell x:Name="QtyEntry" Label="Quantity" Placeholder="Enter initial quantity"/>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>
