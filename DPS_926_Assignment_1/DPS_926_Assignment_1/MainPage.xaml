@@ -79,14 +79,35 @@
                TextColor="Black"
                Margin="10"/>
         <ListView x:Name="Inventory"
-                  ItemsSource="{Binding Items}">
+                  ItemsSource="{Binding Items}"
+                  RowHeight="55"
+                  SeparatorColor="Black"
+                  ItemSelected="Inventory_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}"
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical" Padding="5">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Name}" 
+                                       TextColor="Black" 
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="StartAndExpand"/>
+                                <Label Text="{Binding Quantity}"
+                                       TextColor="Black"
+                                       FontSize="15"
+                                       HorizontalOptions="EndAndExpand"/>
+                            </StackLayout>
+                            <Label Text="{Binding Price, StringFormat='{0:C2}'}"
+                                   FontSize="15"
+                                   TextColor="DarkCyan"/>
+                        </StackLayout>
+                    </ViewCell>
+                    <!--<TextCell Text="{Binding Name}"
                               TextColor="Black"
                               Detail="{Binding Quantity}"
                               DetailColor="blue"
-                              Tapped="TextCell_Tapped"/>
+                              Tapped="TextCell_Tapped"/>-->
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
