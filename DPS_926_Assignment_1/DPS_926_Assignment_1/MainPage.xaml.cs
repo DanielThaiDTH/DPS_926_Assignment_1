@@ -20,6 +20,7 @@ namespace DPS_926_Assignment_1
 
     public partial class MainPage : ContentPage
     {
+        private bool displayLock = false;
         private Item cur_item;
         private int cur_item_idx = 0;
         private int total_items;
@@ -45,14 +46,14 @@ namespace DPS_926_Assignment_1
             items = inventory;
             history = new ObservableCollection<PurchaseLog>();
             ManagerChildPage.RegisterHistory(history);
-            total_items = items.Count;
-            cur_item = items[cur_item_idx];
+            total_items = 0;
+            //cur_item = items[cur_item_idx];
             total = 0;
 
             InitializeComponent();
 
             Inventory.ItemsSource = items;
-            ItemName.Text = cur_item.Name;
+            //ItemName.Text = cur_item.Name;
             Quantity.Text = "0";
             Total.Text = total.ToString();
             SetUpButtons();
@@ -94,23 +95,36 @@ namespace DPS_926_Assignment_1
         }
 
         //Sets the current selected item when tapped on the list
-        public void TextCell_Tapped(object sender, EventArgs e)
+        private void Inventory_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            TextCell selected = (TextCell) sender;
-            cur_item = items.First<Item>(it => it.Name.Equals(selected.Text));
+            cur_item = (Item)e.SelectedItem;
             cur_item_idx = items.IndexOf(cur_item);
             ItemName.Text = cur_item.Name;
             total = total_items * cur_item.Price;
             Total.Text = total.ToString();
         }
+        //public void TextCell_Tapped(object sender, EventArgs e)
+        //{
+        //    ViewCell selected = (ViewCell) sender;
+        //    cur_item = items.First<Item>(it => it.Name.Equals(selected.Text));
+        //    cur_item_idx = items.IndexOf(cur_item);
+        //    ItemName.Text = cur_item.Name;
+        //    total = total_items * cur_item.Price;
+        //    Total.Text = total.ToString();
+        //}
 
         //Updates the total selected when a number pad button is clicked
-        private void Num_Clicked(object sender, EventArgs e)
+        async private void Num_Clicked(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             if (digits.Count >= 9) //prevent integer overflow
             {
-                DisplayAlert("Quantity Too Large", "Entered quantity is too large", "Close");
+                if (!displayLock)
+                {
+                    displayLock = true;
+                    await DisplayAlert("Quantity Too Large", "Entered quantity is too large", "Close");
+                    displayLock = false;
+                }
                 return;
             } else if (digits.Count == 0 && but_vals[button.Text] == 0)
             {
@@ -126,18 +140,35 @@ namespace DPS_926_Assignment_1
             }
 
             Quantity.Text = total_items.ToString();
-            total = total_items * cur_item.Price;
-            Total.Text = total.ToString();
+            if (cur_item != null)
+            {
+                total = total_items * cur_item.Price;
+                Total.Text = total.ToString();
+            }
         }
 
-        private void BuyButton_Clicked(object sender, EventArgs e)
+        async private void BuyButton_Clicked(object sender, EventArgs e)
         {
             Button button = (Button)sender;
 
-            if (cur_item.Quantity < total_items)
+            if (cur_item == null) 
             {
-                DisplayAlert("Quantity Too Large",
-                    "Number of " + cur_item.Name + "s selected is more than what is in inventory.", "Close");
+                if (!displayLock)
+                {
+                    displayLock = true;
+                    await DisplayAlert("No Selected Item", "Must select an item.", "Close");
+                    displayLock = false;
+                }
+                return;
+            } else if (cur_item.Quantity < total_items)
+            {
+                if (!displayLock)
+                {
+                    displayLock = true;
+                    await DisplayAlert("Quantity Too Large",
+                        "Number of " + cur_item.Name + " selected is more than what is in inventory.", "Close");
+                    displayLock = false;
+                }
             } else if (total_items == 0)
             {
                 return;
@@ -158,5 +189,6 @@ namespace DPS_926_Assignment_1
         {
             Navigation.PushAsync(ManagerChildPage);
         }
+
     }
 }
