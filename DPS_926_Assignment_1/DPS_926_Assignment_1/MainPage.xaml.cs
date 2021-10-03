@@ -103,17 +103,9 @@ namespace DPS_926_Assignment_1
             total = total_items * cur_item.Price;
             Total.Text = total.ToString();
         }
-        //public void TextCell_Tapped(object sender, EventArgs e)
-        //{
-        //    ViewCell selected = (ViewCell) sender;
-        //    cur_item = items.First<Item>(it => it.Name.Equals(selected.Text));
-        //    cur_item_idx = items.IndexOf(cur_item);
-        //    ItemName.Text = cur_item.Name;
-        //    total = total_items * cur_item.Price;
-        //    Total.Text = total.ToString();
-        //}
 
         //Updates the total selected when a number pad button is clicked
+        //Also prevents numbers that are too large.
         async private void Num_Clicked(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -147,6 +139,9 @@ namespace DPS_926_Assignment_1
             }
         }
 
+        /*Checks if an item is selected, quantity is greater than  
+         *zero and enough is in the inventory for purchase. If so, the total is
+         *deducted from the inventory and a log of the purchase is added to history. */
         async private void BuyButton_Clicked(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -185,6 +180,7 @@ namespace DPS_926_Assignment_1
             digits.Clear();
         }
 
+        //Changes page to the manager page
         private void ManagerButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(ManagerChildPage);

@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Daniel Thai
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -6,6 +8,8 @@ using System.Text;
 
 namespace DPS_926_Assignment_1
 {
+    /*Represents the log of a single purchase. Stores the item name, total cost, 
+      quantity purchased and the time of purchase.*/
     public class PurchaseLog
     {
         public String Name { get; private set; }

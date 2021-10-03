@@ -27,6 +27,7 @@ namespace DPS_926_Assignment_1
         {
         }
 
+        //Creates the initial inventory
         private ObservableCollection<Item> CreateInventory(ObservableCollection<Item> items)
         {
             AddItem(items, new Item("Pants", Convert.ToDecimal(55.50), 20));

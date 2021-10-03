@@ -17,8 +17,8 @@ namespace DPS_926_Assignment_1
     {
         ObservableCollection<Item> _inventory;
         ObservableCollection<PurchaseLog> history;
-        HistoryPage historyView;
-        RestockPage restocker;
+        HistoryPage historyView; //Will exist for the life of this page
+        RestockPage restocker;   //Will exist for the life of this page
         public ManagerPage(ObservableCollection<Item> inventory)
         {
             InitializeComponent();

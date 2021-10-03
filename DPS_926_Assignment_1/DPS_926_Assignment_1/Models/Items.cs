@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Daniel Thai
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -6,6 +8,8 @@ using System.Text;
 
 namespace DPS_926_Assignment_1
 {
+    /*Represents an item that can be purchased. Stores the name, price and quantity. 
+      Will notify if quantity is changed. Equality is determined soley by the item name.*/
     public class Item :INotifyPropertyChanged
     {
         private int _quantity;

@@ -23,6 +23,10 @@ namespace DPS_926_Assignment_1
             InitializeComponent();
         }
 
+        /*Handles saving a new product. It ensures that all fields are filled in and 
+         with the price and quantity being positive numbers. It also checks to see if 
+         the new item is not already in the inventory. Once saved, it will go back to 
+         the Manager page.*/
         private void saveClicked(object sender, EventArgs e)
         {
             decimal price;
